@@ -1,0 +1,16 @@
+@import "ember-modal-dialog/ember-modal-structure.css";
+@import "ember-modal-dialog/ember-modal-appearance.css";
+
+.done1{text-decoration: line-through;}
+.main{max-width: 600px;margin: 0 auto;background: rgb(144, 180, 144);}
+.menu{max-width: 600px;margin: 0 auto; text-align: center;padding: 10px 0;background: darkgray;}
+.stats{text-align: center;}
+h6{margin: 5px;}
+ol.userol li{margin: 5px;border-bottom: 1px solid;padding: 5px;}
+button{ padding:5px 15px; 
+    background:#ccc; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}

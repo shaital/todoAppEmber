@@ -1,0 +1,23 @@
+
+<form {{on "submit" this.authenticate}}>
+  <label for="password">Password</label>
+  <input id='password' name='password'  placeholder="Enter Password" value={{this.password}} {{on "change" (fn this.update "password")}}>
+  <br/>
+  <label for="identification">name</label>
+  <input id='identification' name='identification' placeholder="Enter name" value={{this.identification}} {{on "change" (fn this.update "identification")}}>
+  <br/>
+   <label for="identification">email</label>
+  <input id='email' name='email' placeholder="email" value={{this.email}} {{on "change" (fn this.update "email")}}>
+  <br/>
+  <button type="submit">Register</button>
+  <br/>
+  {{#if this.errorMessage}}
+     <ol>
+  {{#each this.errorMessage as  |error| }}
+    <li>
+      {{error}}
+    </li>
+  {{/each}}
+  </ol>
+  {{/if}}
+</form>

@@ -1,0 +1,72 @@
+{{page-title "Dashboard"}}
+<button {{on "click" this.toggleModal
+}}>+</button>
+<hr/>
+<div class="stats">
+  Total: {{this.todosListService.todos.length}}
+  Completed: {{this.completed}}
+  Todo : {{ if this.not_completed this.not_completed this.todosListService.todos.length }}
+</div>
+<hr/>
+<ol>
+  {{#each this.todosListService.todos as  |item index| }}
+<li class="done{{item.is_completed}}">
+  <h3 >
+ {{item.title}}
+  </h3> 
+  <h6>
+    {{item.description}}
+  </h6>
+<button {{on "click" (fn this.deleteItem item)}}>X</button>
+<button {{on "click" (fn this.doneItem item)}}>V</button>
+<button {{on "click" (fn this.toggleModalShare item)}}>
+  {{#if item.shared}}
+        Shared by you
+  {{else if item.shared_by_user_id}}
+        Shared with you
+  {{else}}
+        Share
+  {{/if}}
+
+</button>
+</li>
+  {{/each}}
+</ol>
+
+{{#if this.isShowingModal}}
+  {{#modal-dialog
+      onClose=(action "toggleModal")
+      targetAttachment="center"
+      translucentOverlay=true
+  }}
+    <form {{on "submit" this.add}}>
+  <label for="title">title</label>
+  <input id='title' name='title'  placeholder="Enter title" value={{this.title}} {{on "change" (fn this.update "title")}}>
+  <label for="descreption">descreption</label>
+  <input id='description' name='description' placeholder="Enter description" value={{this.description}} {{on "change" (fn this.update "description")}}>
+  <button type="submit">Save</button>
+  {{#if this.errorMessage}}
+    <p>{{this.errorMessage}}</p>
+  {{/if}}
+</form>
+  {{/modal-dialog}}
+{{/if}}
+
+{{#if this.isShowingModalShare}}
+  {{#modal-dialog
+      onClose=(action "toggleModalShare")
+      targetAttachment="center"
+      translucentOverlay=true
+  }}
+  <h3>Share task with a friend</h3>
+    <ol class="userol">
+  {{#each this.users as  |user| }}
+    <li>
+      <input type="checkbox" {{on "input" (fn this.addToShare user.id)}}>
+      {{user.name}}
+    </li>
+  {{/each}}
+  </ol>
+<button {{on "click" share}}>Share</button>
+  {{/modal-dialog}}
+{{/if}}

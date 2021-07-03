@@ -46,6 +46,19 @@ module.exports = function (environment) {
   if (environment === 'production') {
     // here you can enable a production-specific feature
   }
-
+  ENV.apiBaseUrl = 'http://todoapi/api';
+  ENV['ember-simple-auth'] = {
+    authorizer: 'authorizer:token',
+    routeAfterAuthentication: '/dashboard',
+    routeIfAlreadyAuthenticated: '/dashboard'
+  };
+  ENV['ember-simple-auth-token'] = {
+    refreshAccessTokens: true,
+    timeFactor: 10000,
+    refreshLeeway: 30000,
+    serverTokenEndpoint: ENV.apiBaseUrl + '/register',
+    identificationField: 'token',
+    tokenPropertyName:'token',
+  };
   return ENV;
 };

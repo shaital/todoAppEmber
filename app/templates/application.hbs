@@ -1,7 +1,16 @@
 {{page-title "Todo"}}
 
-{{!-- The following component displays Ember's default welcome message. --}}
-<WelcomePage />
-{{!-- Feel free to remove this! --}}
+<div class="menu">
+  …
+  {{#if this.session.isAuthenticated}}
+    <a {{on "click" this.invalidateSession}}>Logout</a>
+    {{#link-to 'authenticated.dashboard'}}Dashboard{{/link-to}}
+  {{else}}
+    {{#link-to 'register'}}Register{{/link-to}}
+    {{#link-to 'login'}}Login{{/link-to}}
 
-{{outlet}}
+  {{/if}}
+</div>
+<div class="main">
+  {{outlet}}
+</div>
